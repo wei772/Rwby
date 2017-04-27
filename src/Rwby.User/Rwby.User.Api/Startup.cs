@@ -7,8 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Rwby.User.Service;
+using Microsoft.EntityFrameworkCore;
+using Rwby.User.Core;
 
-namespace WebApplication1
+namespace Rwby.User.Api
 {
     public class Startup
     {
@@ -28,7 +31,13 @@ namespace WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+
+            services.AddDbContext<UserContext>(options =>
+                 options.UseSqlServer(Configuration.GetConnectionString("UserConnection")));
+
             services.AddMvc();
+
+          //  IServiceProvider serviceProvider = services.BuildServiceProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +45,8 @@ namespace WebApplication1
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            MapConfig.Config();
 
             app.UseMvc();
         }

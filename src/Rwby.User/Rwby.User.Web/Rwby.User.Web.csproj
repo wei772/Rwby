@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
@@ -17,6 +17,11 @@
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Rwby.DataAccess\Rwby.DataAccess.csproj" />
+    <ProjectReference Include="..\Rwby.User.Api\Rwby.User.Api.csproj" />
+    <ProjectReference Include="..\Rwby.User.Core\Rwby.User.Core.csproj" />
   </ItemGroup>
 
 </Project>

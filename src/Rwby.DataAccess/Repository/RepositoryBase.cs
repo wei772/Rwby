@@ -14,8 +14,19 @@ namespace Rwby.DataAccess
         /// <summary>
         /// 数据库上下文
         /// </summary>
-        protected  DbContext  Context;
+        protected DbContext DbContext;
 
+
+        public RepositoryBase()
+        {
+            Init();
+        }
+
+
+        public virtual void Init()
+        {
+
+        }
 
         /// <summary>
         /// Insert new item into database
@@ -27,12 +38,12 @@ namespace Rwby.DataAccess
         public TItem Insert<TItem>(TItem item, bool saveImmediately = true)
             where TItem : class
         {
-            var set = Context.Set<TItem>();
+            var set = DbContext.Set<TItem>();
 
             set.Add(item);
             if (saveImmediately)
             {
-                Context.SaveChanges();
+                DbContext.SaveChanges();
             }
             return item;
         }
@@ -47,8 +58,8 @@ namespace Rwby.DataAccess
         public TItem Update<TItem>(TItem item, bool saveImmediately = true)
             where TItem : class
         {
-            var set = Context.Set<TItem>();
-            var entry = Context.Entry(item);
+            var set = DbContext.Set<TItem>();
+            var entry = DbContext.Entry(item);
             if (entry != null && entry.State != EntityState.Detached)
             {
                 // entity is already in memory
@@ -57,14 +68,14 @@ namespace Rwby.DataAccess
             else
             {
                 set.Attach(item);
-                Context.Entry(item).State = EntityState.Modified;
+                DbContext.Entry(item).State = EntityState.Modified;
             }
 
-      
+
 
             if (saveImmediately)
             {
-                Context.SaveChanges();
+                DbContext.SaveChanges();
             }
             return item;
         }
@@ -78,8 +89,8 @@ namespace Rwby.DataAccess
         public void Delete<TItem>(TItem item, bool saveImmediately = true)
            where TItem : class
         {
-            var set = Context.Set<TItem>();
-            var entry = Context.Entry(item);
+            var set = DbContext.Set<TItem>();
+            var entry = DbContext.Entry(item);
             if (entry != null && entry.State != EntityState.Detached)
             {
                 // entity is already in memory
@@ -88,12 +99,12 @@ namespace Rwby.DataAccess
             else
             {
                 set.Attach(item);
-                Context.Entry(item).State = EntityState.Deleted;
+                DbContext.Entry(item).State = EntityState.Deleted;
             }
 
             if (saveImmediately)
             {
-                Context.SaveChanges();
+                DbContext.SaveChanges();
             }
         }
 
@@ -102,7 +113,7 @@ namespace Rwby.DataAccess
         /// </summary>
         public void Save()
         {
-            Context.SaveChanges();
+            DbContext.SaveChanges();
         }
 
         /// <summary>
@@ -110,9 +121,9 @@ namespace Rwby.DataAccess
         /// </summary>
         public void Dispose()
         {
-            if (Context != null)
+            if (DbContext != null)
             {
-                Context.Dispose();
+                DbContext.Dispose();
             }
         }
     }

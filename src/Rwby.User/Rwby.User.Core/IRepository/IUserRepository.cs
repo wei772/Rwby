@@ -5,7 +5,10 @@ using System.Text;
 
 namespace Rwby.User.Core
 {
-    public interface IUserRepository: IRepository
+    public interface IUserRepository : IRepository
     {
+        User GetUser(string userId);
+
+        IList<User> GetUsers();
     }
 }

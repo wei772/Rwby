@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Rwby.User.Core.Model
 {
-    public class OrganizationModel: IOrganization
+    public class OrganizationModel
     {
         public string OrganizationId { get; set; }
 

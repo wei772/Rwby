@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Rwby.User.Core
 {
-    public class UserModel : IUser
+    public class UserModel 
     {
         public string UserId { get; set; }
 

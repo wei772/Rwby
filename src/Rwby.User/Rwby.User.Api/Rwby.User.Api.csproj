@@ -13,5 +13,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Rwby.DataAccess\Rwby.DataAccess.csproj" />
+    <ProjectReference Include="..\Rwby.User.Core\Rwby.User.Core.csproj" />
+    <ProjectReference Include="..\Rwby.User.Service\Rwby.User.Service.csproj" />
+  </ItemGroup>
 
 </Project>
