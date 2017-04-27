@@ -6,27 +6,12 @@ using System.Text;
 
 namespace Rwby.DataAccess
 {
-    /// <summary>
-    /// 数据仓库基类
-    /// </summary>
+   
     public class RepositoryBase : IDisposable, IRepository
     {
-        /// <summary>
-        /// 数据库上下文
-        /// </summary>
+      
         protected DbContext DbContext;
 
-
-        public RepositoryBase()
-        {
-            Init();
-        }
-
-
-        public virtual void Init()
-        {
-
-        }
 
         /// <summary>
         /// Insert new item into database

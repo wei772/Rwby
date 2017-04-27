@@ -11,16 +11,16 @@ namespace Rwby.User.Api.Controllers
     public class UserController : Controller
     {
 
-        private UserService _userService;
+        private readonly UserService _userService;
 
-        public UserController()
+        public UserController(UserService userService)
         {
-            _userService = new UserService();
+            _userService = userService;
         }
 
+  
         //GET api/values/5
-        [HttpGet("{id}")]
-
+        [HttpGet("GetUser/{id}")]
         public Core.User GetUser(string userId)
         {
             return _userService.GetUser(userId);

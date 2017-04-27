@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rwby.User.Core;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,11 +7,11 @@ namespace Rwby.User.Service
 {
     public class UserService
     {
-        private UserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
 
-        public UserService()
+        public UserService(IUserRepository userRepository)
         {
-            _userRepository = new UserRepository();
+            _userRepository = userRepository;
         }
 
         public Core.User GetUser(string userId)

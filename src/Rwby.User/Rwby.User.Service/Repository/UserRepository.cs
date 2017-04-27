@@ -17,10 +17,11 @@ namespace Rwby.User.Service
             get { return (UserContext)DbContext; }
         }
 
-        public override void Init()
+        public UserRepository(UserContext userContext)
         {
-            //DbContext = serviceProvider.GetService<UserContext>();
+            DbContext = userContext;
         }
+ 
 
         public Core.User GetUser(string userId)
         {

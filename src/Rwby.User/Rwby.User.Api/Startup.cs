@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
+
 using Rwby.User.Service;
 using Microsoft.EntityFrameworkCore;
 using Rwby.User.Core;
@@ -30,14 +32,33 @@ namespace Rwby.User.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
 
-            services.AddDbContext<UserContext>(options =>
-                 options.UseSqlServer(Configuration.GetConnectionString("UserConnection")));
+            ConfigureDbContext(services);
+            ConfigureRepository(services);
+            ConfigureBaseService(services);
 
             services.AddMvc();
 
-          //  IServiceProvider serviceProvider = services.BuildServiceProvider();
+            MapConfig.Config();
+
+            //  IServiceProvider serviceProvider = services.BuildServiceProvider();
+        }
+
+        public void ConfigureDbContext(IServiceCollection services)
+        {
+            services.AddDbContext<UserContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("UserConnection")));
+        }
+
+        public void ConfigureRepository(IServiceCollection services)
+        {
+
+            services.AddTransient<IUserRepository, UserRepository>();
+        }
+
+        public void ConfigureBaseService(IServiceCollection services)
+        {
+            services.AddTransient<UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,9 +67,18 @@ namespace Rwby.User.Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            MapConfig.Config();
+            if (env.IsDevelopment())
+            {
+                // 这个很有用
+                app.UseDeveloperExceptionPage();
+            }
 
             app.UseMvc();
+
+            app.Run(async context =>
+           {
+               await context.Response.WriteAsync("can't find api");
+           });
         }
     }
 }
