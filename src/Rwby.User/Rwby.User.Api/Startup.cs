@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Rwby.User.Service;
 using Microsoft.EntityFrameworkCore;
 using Rwby.User.Core;
+using AutoMapper;
 
 namespace Rwby.User.Api
 {
@@ -32,16 +33,24 @@ namespace Rwby.User.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            ConfigureMapper(services);
             ConfigureDbContext(services);
             ConfigureRepository(services);
             ConfigureBaseService(services);
 
             services.AddMvc();
 
-            MapConfig.Config();
 
-            //  IServiceProvider serviceProvider = services.BuildServiceProvider();
+            //IServiceProvider serviceProvider = services.BuildServiceProvider();
+        }
+
+        public void ConfigureMapper(IServiceCollection services)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new UserMapProfile());
+            });
+            services.AddSingleton(sp => config.CreateMapper());
         }
 
         public void ConfigureDbContext(IServiceCollection services)

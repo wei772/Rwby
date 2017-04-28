@@ -12,16 +12,19 @@ namespace Rwby.User.Service
     public class UserRepository : RepositoryBase, IUserRepository
     {
 
-        public UserContext UserContext
+        protected UserContext UserContext
         {
             get { return (UserContext)DbContext; }
         }
 
-        public UserRepository(UserContext userContext)
+        private readonly IMapper _mapper;
+
+        public UserRepository(UserContext userContext, IMapper mapper)
         {
             DbContext = userContext;
+            _mapper = mapper;
         }
- 
+
 
         public Core.User GetUser(Guid userId)
         {
@@ -29,7 +32,7 @@ namespace Rwby.User.Service
                     .AsNoTracking()
                     .SingleOrDefault(m => m.UserId == userId);
 
-            return Mapper.Map<Core.User>(user);
+            return _mapper.Map<Core.User>(user);
         }
 
         public IList<Core.User> GetUsers()
@@ -38,7 +41,7 @@ namespace Rwby.User.Service
                    .AsNoTracking()
                    .ToList();
 
-            return Mapper.Map<IList<Core.User>>(users);
+            return _mapper.Map<IList<Core.User>>(users);
         }
     }
 }
