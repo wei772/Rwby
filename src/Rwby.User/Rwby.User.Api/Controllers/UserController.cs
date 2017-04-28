@@ -7,7 +7,6 @@ using Rwby.User.Service;
 
 namespace Rwby.User.Api.Controllers
 {
-    [Route("api/[controller]")]
     public class UserController : Controller
     {
 
@@ -19,14 +18,14 @@ namespace Rwby.User.Api.Controllers
         }
 
   
-        //GET api/values/5
-        [HttpGet("GetUser/{id}")]
-        public Core.User GetUser(string userId)
+      
+        [HttpGet]
+        public Core.User GetUser(Guid userId)
         {
             return _userService.GetUser(userId);
         }
 
-        // GET api/values
+       
         [HttpGet]
         public IList<Core.User> GetUsers()
         {

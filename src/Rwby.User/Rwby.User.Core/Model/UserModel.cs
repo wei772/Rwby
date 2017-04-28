@@ -6,7 +6,7 @@ namespace Rwby.User.Core
 {
     public class UserModel 
     {
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
 
         public string UserName { get; set; }
 

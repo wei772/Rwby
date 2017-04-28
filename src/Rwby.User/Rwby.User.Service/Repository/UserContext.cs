@@ -24,7 +24,9 @@ namespace Rwby.User.Service
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserEntity>().ToTable("User");
+            modelBuilder.Entity<UserEntity>()
+                .ToTable("User")
+                .HasKey(u => u.UserId);
 
 
         }

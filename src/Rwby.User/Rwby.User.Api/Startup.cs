@@ -53,12 +53,12 @@ namespace Rwby.User.Api
         public void ConfigureRepository(IServiceCollection services)
         {
 
-            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         public void ConfigureBaseService(IServiceCollection services)
         {
-            services.AddTransient<UserService>();
+            services.AddScoped<UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,7 +73,13 @@ namespace Rwby.User.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            app.UseMvc
+                (
+                options =>
+                {
+                    options.MapRoute("apidefault", "api/{controller}/{action}/{id?}");
+                }
+            );
 
             app.Run(async context =>
            {

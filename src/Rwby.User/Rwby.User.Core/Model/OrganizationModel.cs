@@ -6,7 +6,7 @@ namespace Rwby.User.Core.Model
 {
     public class OrganizationModel
     {
-        public string OrganizationId { get; set; }
+        public Guid OrganizationId { get; set; }
 
         public string OrganizationName { get; set; }
 

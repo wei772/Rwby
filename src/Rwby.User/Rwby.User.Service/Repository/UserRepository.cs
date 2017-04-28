@@ -23,7 +23,7 @@ namespace Rwby.User.Service
         }
  
 
-        public Core.User GetUser(string userId)
+        public Core.User GetUser(Guid userId)
         {
             var user = UserContext.Users
                     .AsNoTracking()
@@ -35,7 +35,8 @@ namespace Rwby.User.Service
         public IList<Core.User> GetUsers()
         {
             var users = UserContext.Users
-                   .AsNoTracking();
+                   .AsNoTracking()
+                   .ToList();
 
             return Mapper.Map<IList<Core.User>>(users);
         }

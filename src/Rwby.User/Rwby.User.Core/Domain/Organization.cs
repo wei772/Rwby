@@ -7,7 +7,7 @@ namespace Rwby.User.Core
     public class Organization : IOrganization
     {
 
-        public string OrganizationId { get; set; }
+        public Guid OrganizationId { get; set; }
 
         public string OrganizationName { get; set; }
 

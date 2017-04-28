@@ -6,7 +6,7 @@ namespace Rwby.User.Core
 {
     public interface IOrganization
     {
-        string OrganizationId { get; set; }
+        Guid OrganizationId { get; set; }
 
         string OrganizationName { get; set; }
 
