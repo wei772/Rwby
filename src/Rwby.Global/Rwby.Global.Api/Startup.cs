@@ -13,6 +13,7 @@ using Rwby.Global.Service;
 using Microsoft.EntityFrameworkCore;
 using Rwby.Global.Core;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Rwby.Global.Api
 {
@@ -55,8 +56,13 @@ namespace Rwby.Global.Api
 
         public void ConfigureDbContext(IServiceCollection services)
         {
-            services.AddDbContext<UserContext>(options =>
+            services.AddDbContext<GlobalContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("UserConnection")));
+
+            services.AddIdentity<User, IdentityRole>()
+               .AddEntityFrameworkStores<GlobalContext>()
+               .AddDefaultTokenProviders();
+
         }
 
         public void ConfigureRepository(IServiceCollection services)

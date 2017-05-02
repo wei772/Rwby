@@ -20,7 +20,7 @@ namespace Rwby.Global.Api
   
       
         [HttpGet]
-        public Core.User GetUser(Guid userId)
+        public Core.User GetUser(string userId)
         {
             return _userService.GetUser(userId);
         }

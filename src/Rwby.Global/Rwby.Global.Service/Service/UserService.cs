@@ -14,7 +14,7 @@ namespace Rwby.Global.Service
             _userRepository = userRepository;
         }
 
-        public Core.User GetUser(Guid userId)
+        public Core.User GetUser(string userId)
         {
             return _userRepository.GetUser(userId);
         }

@@ -7,7 +7,7 @@ namespace Rwby.Global.Core
 {
     public interface IUserRepository : IRepository
     {
-        User GetUser(Guid userId);
+        User GetUser(string userId);
 
         IList<User> GetUsers();
     }

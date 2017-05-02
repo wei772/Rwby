@@ -12,25 +12,25 @@ namespace Rwby.Global.Service
     public class UserRepository : RepositoryBase, IUserRepository
     {
 
-        protected UserContext UserContext
+        protected GlobalContext UserContext
         {
-            get { return (UserContext)DbContext; }
+            get { return (GlobalContext)DbContext; }
         }
 
         private readonly IMapper _mapper;
 
-        public UserRepository(UserContext userContext, IMapper mapper)
+        public UserRepository(GlobalContext userContext, IMapper mapper)
         {
             DbContext = userContext;
             _mapper = mapper;
         }
 
 
-        public Core.User GetUser(Guid userId)
+        public Core.User GetUser(string userId)
         {
             var user = UserContext.Users
                     .AsNoTracking()
-                    .SingleOrDefault(m => m.UserId == userId);
+                    .SingleOrDefault(m => m.Id == userId);
 
             return _mapper.Map<Core.User>(user);
         }

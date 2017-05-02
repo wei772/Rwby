@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Rwby.Global.Core;
 using System;
 using System.Collections.Generic;
@@ -6,17 +7,17 @@ using System.Text;
 
 namespace Rwby.Global.Service
 {
-    public class UserContext : DbContext
+    public class GlobalContext : IdentityDbContext<UserEntity>
     {
-        public UserContext()
+        public GlobalContext()
         {
         }
 
-        public UserContext(DbContextOptions options) : base(options)
+        public GlobalContext(DbContextOptions options) : base(options)
         {
         }
 
-        public DbSet<UserEntity> Users { get; set; }
+        //public DbSet<UserEntity> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -24,11 +25,7 @@ namespace Rwby.Global.Service
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserEntity>()
-                .ToTable("User")
-                .HasKey(u => u.UserId);
-
-
+            base.OnModelCreating(modelBuilder);
         }
 
     }
