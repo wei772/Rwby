@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Rwby.Global.Core
 {
-    public class UserMapProfile : Profile
+    public class GlobalMapProfile : Profile
     {
-        public UserMapProfile()
+        public GlobalMapProfile()
         {
             CreateMap<User, UserModel>();
             CreateMap<UserEntity, User>();

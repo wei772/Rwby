@@ -34,25 +34,15 @@ namespace Rwby.Global.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            ConfigureMapper(services);
+            services.AddGlobalMapper()
+                .AddGlobalRepository()
+                .AddGlobalService()
+                .AddMvc();
+
             ConfigureDbContext(services);
-            ConfigureRepository(services);
-            ConfigureBaseService(services);
-
-            services.AddMvc();
-
-
-            //IServiceProvider serviceProvider = services.BuildServiceProvider();
         }
 
-        public void ConfigureMapper(IServiceCollection services)
-        {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new UserMapProfile());
-            });
-            services.AddSingleton(sp => config.CreateMapper());
-        }
+
 
         public void ConfigureDbContext(IServiceCollection services)
         {
@@ -65,16 +55,7 @@ namespace Rwby.Global.Api
 
         }
 
-        public void ConfigureRepository(IServiceCollection services)
-        {
 
-            services.AddScoped<IUserRepository, UserRepository>();
-        }
-
-        public void ConfigureBaseService(IServiceCollection services)
-        {
-            services.AddScoped<UserService>();
-        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
