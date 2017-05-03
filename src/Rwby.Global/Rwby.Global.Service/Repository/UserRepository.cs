@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Rwby.Global.Service
 {
@@ -26,22 +27,22 @@ namespace Rwby.Global.Service
         }
 
 
-        public Core.User GetUser(string userId)
+        public async Task<User> GetUser(string userId)
         {
-            var user = UserContext.Users
+            var user = await UserContext.Users
                     .AsNoTracking()
-                    .SingleOrDefault(m => m.Id == userId);
+                    .SingleOrDefaultAsync(m => m.Id == userId);
 
-            return _mapper.Map<Core.User>(user);
+            return _mapper.Map<User>(user);
         }
 
-        public IList<Core.User> GetUsers()
+        public async Task<IList<User>> GetUsers()
         {
-            var users = UserContext.Users
+            var users = await UserContext.Users
                    .AsNoTracking()
-                   .ToList();
+                   .ToListAsync(); ;
 
-            return _mapper.Map<IList<Core.User>>(users);
+            return _mapper.Map<IList<User>>(users);
         }
     }
 }

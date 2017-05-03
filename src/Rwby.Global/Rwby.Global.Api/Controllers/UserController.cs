@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Rwby.Global.Service;
+using Rwby.Global.Core;
 
 namespace Rwby.Global.Api
 {
@@ -17,17 +18,17 @@ namespace Rwby.Global.Api
             _userService = userService;
         }
 
-  
-      
+
+
         [HttpGet]
-        public Core.User GetUser(string userId)
+        public Task<User> GetUser(string userId)
         {
             return _userService.GetUser(userId);
         }
 
-       
+
         [HttpGet]
-        public IList<Core.User> GetUsers()
+        public Task<IList<User>> GetUsers()
         {
             return _userService.GetUsers();
         }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Rwby.Global.Service
 {
@@ -14,15 +15,15 @@ namespace Rwby.Global.Service
             _userRepository = userRepository;
         }
 
-        public Core.User GetUser(string userId)
+        public Task<User> GetUser(string userId)
         {
             return _userRepository.GetUser(userId);
         }
 
 
-        public IList<Core.User> GetUsers()
+        public Task<IList<User>> GetUsers()
         {
             return _userRepository.GetUsers();
         }
-    }
+}
 }

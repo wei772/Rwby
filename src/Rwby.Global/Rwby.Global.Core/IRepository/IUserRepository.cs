@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Rwby.Global.Core
 {
     public interface IUserRepository : IRepository
     {
-        User GetUser(string userId);
+        Task<User> GetUser(string userId);
 
-        IList<User> GetUsers();
+        Task<IList<User>> GetUsers();
     }
 }
