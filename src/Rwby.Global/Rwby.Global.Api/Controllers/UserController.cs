@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Rwby.Global.Service;
 using Rwby.Global.Core;
+using Rwby.Global.Service;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Rwby.Global.Api
 {
+
+    [Authorize]
     public class UserController : Controller
     {
 

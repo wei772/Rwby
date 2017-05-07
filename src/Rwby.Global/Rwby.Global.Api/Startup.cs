@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Http;
-
-using Rwby.Global.Service;
-using Microsoft.EntityFrameworkCore;
 using Rwby.Global.Core;
-using AutoMapper;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Rwby.Global.Service;
 
 namespace Rwby.Global.Api
 {
@@ -39,6 +33,13 @@ namespace Rwby.Global.Api
                 .AddGlobalService()
                 .AddMvc();
 
+            services.AddIdentityServer()
+                .AddTemporarySigningCredential()
+                .AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
+                .AddInMemoryClients(IdentityServerConfig.GetClients())
+                ;
+
+
             ConfigureDbContext(services);
         }
 
@@ -63,11 +64,24 @@ namespace Rwby.Global.Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+
+            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
+            {
+                Authority = "http://localhost:50707",
+                RequireHttpsMetadata = false,
+                ApiName = "GetUsers"
+            });
+
+
             if (env.IsDevelopment())
             {
                 // 这个很有用
                 app.UseDeveloperExceptionPage();
             }
+
+
+            app.UseIdentityServer();
+
 
             app.UseMvc
                 (
