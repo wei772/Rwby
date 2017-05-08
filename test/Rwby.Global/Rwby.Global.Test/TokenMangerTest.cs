@@ -12,13 +12,29 @@ namespace Rwby.Global.Test
         [TestMethod]
         public async Task CallServiceTestAsync()
         {
-            Console.Title = "Console Client Credentials Flow";
 
             var manager = new TokenManger();
             var response = await manager.RequestTokenAsync();
             response.Show();
 
-            await manager.CallServiceAsync(response.AccessToken);
+            var result = await manager.CallServiceAsync(response.AccessToken, "user/getusers");
+
+            Console.WriteLine("result");
+
+        }
+
+
+        [TestMethod]
+        public async Task CallServiceWithPasswordTestAsync()
+        {
+
+            var manager = new TokenManger();
+            var response = await manager.RequestTokenWithPasswordAsync();
+            response.Show();
+
+            var result = manager.CallServiceAsync(response.AccessToken, "user/getuser?userId=2f63448e-41a5-4757-a0a7-03d1ecf30696");
+
+            Console.WriteLine("result");
         }
 
     }

@@ -15,7 +15,10 @@ namespace Rwby.Global.ApiClient
         public async Task<TokenResponse> RequestTokenAsync()
         {
             var disco = await DiscoveryClient.GetAsync(Constants.Authority);
-            if (disco.IsError) throw new Exception(disco.Error);
+            if (disco.IsError)
+            {
+                throw new Exception(disco.Error);
+            }
 
             var client = new TokenClient(
                 disco.TokenEndpoint,
@@ -26,7 +29,30 @@ namespace Rwby.Global.ApiClient
             return token;
         }
 
-        public async Task CallServiceAsync(string token)
+
+        public async Task<TokenResponse> RequestTokenWithPasswordAsync()
+        {
+
+            var disco = await DiscoveryClient.GetAsync(Constants.Authority);
+            if (disco.IsError) throw new Exception(disco.Error);
+
+            var tokenClient = new TokenClient(disco.TokenEndpoint, "ro.client", "secret");
+            var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync("alice", "password", "GetUser");
+
+            if (tokenResponse.IsError)
+            {
+                throw new Exception(tokenResponse.Error);
+            }
+
+            Console.WriteLine(tokenResponse.Json);
+            Console.WriteLine("\n\n");
+
+            return tokenResponse;
+
+        }
+
+
+        public async Task<string> CallServiceAsync(string token, string api)
         {
             var baseAddress = Constants.SampleApi;
 
@@ -36,10 +62,9 @@ namespace Rwby.Global.ApiClient
             };
 
             client.SetBearerToken(token);
-            var response = await client.GetStringAsync("user/getusers");
+            var response = await client.GetStringAsync(api);
+            return response;
 
-            "\n\nService claims:".ConsoleGreen();
-            Console.WriteLine(JArray.Parse(response));
         }
     }
 }

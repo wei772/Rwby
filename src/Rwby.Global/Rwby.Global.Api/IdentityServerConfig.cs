@@ -1,4 +1,5 @@
 ﻿using IdentityServer4.Models;
+using IdentityServer4.Test;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,8 +38,40 @@ namespace Rwby.Global.Api
 
                     // scopes that client has access to
                     AllowedScopes = { "GetUsers" }
+                },
+
+                new Client
+                {
+                    ClientId = "ro.client",
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+                    AllowedScopes = { "GetUser" }
                 }
             };
         }
+
+        public static List<TestUser> GetUsers()
+        {
+            return new List<TestUser>
+             {
+                 new TestUser
+                 {
+                     SubjectId = "1",
+                     Username = "alice",
+                     Password = "password"
+                 },
+                 new TestUser
+                 {
+                     SubjectId = "2",
+                     Username = "bob",
+                     Password = "password"
+                 }
+             };
+        }
+
     }
 }
