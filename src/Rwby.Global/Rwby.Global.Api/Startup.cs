@@ -37,6 +37,7 @@ namespace Rwby.Global.Api
                 .AddTemporarySigningCredential()
                 .AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
                 .AddInMemoryClients(IdentityServerConfig.GetClients())
+                .AddTestUsers(IdentityServerConfig.GetUsers())
                 ;
 
 
@@ -65,20 +66,21 @@ namespace Rwby.Global.Api
             loggerFactory.AddDebug();
 
 
-            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
-            {
-                Authority = "http://localhost:50707",
-                RequireHttpsMetadata = false,
-                ApiName = "GetUsers"
-            });
-
-
             if (env.IsDevelopment())
             {
                 // 这个很有用
                 app.UseDeveloperExceptionPage();
             }
 
+
+            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
+            {
+                Authority = "http://localhost:50707",
+                RequireHttpsMetadata = false,
+                AllowedScopes = {"GetUsers","GetUser"}
+            });
+
+       
 
             app.UseIdentityServer();
 

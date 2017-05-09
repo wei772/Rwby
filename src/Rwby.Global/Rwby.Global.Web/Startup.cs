@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.IdentityModel.Tokens.Jwt;
+using Rwby.Global.Core;
 
 namespace Rwby.Global.Web
 {
@@ -29,6 +31,16 @@ namespace Rwby.Global.Web
         {
             // Add framework services.
             services.AddMvc();
+
+
+            services.AddIdentityServer()
+                .AddTemporarySigningCredential()
+                .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
+                .AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
+                .AddInMemoryClients(IdentityServerConfig.GetClients())
+                .AddTestUsers(IdentityServerConfig.GetUsers())
+            ;
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,12 +61,29 @@ namespace Rwby.Global.Web
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
+            app.UseIdentityServer();
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                AuthenticationScheme = "Cookies"
             });
+
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
+            {
+                AuthenticationScheme = "oidc",
+                SignInScheme = "Cookies",
+
+                Authority = "http://localhost:50274",
+                RequireHttpsMetadata = false,
+
+                ClientId = "mvc",
+                SaveTokens = true
+            });
+
+            app.UseMvcWithDefaultRoute();
         }
     }
 }
