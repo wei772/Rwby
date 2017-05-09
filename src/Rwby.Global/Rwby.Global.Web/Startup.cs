@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.IdentityModel.Tokens.Jwt;
 using Rwby.Global.Core;
+using IdentityServer4;
 
 namespace Rwby.Global.Web
 {
@@ -74,8 +75,8 @@ namespace Rwby.Global.Web
             app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
             {
                 AuthenticationScheme = "oidc",
-                SignInScheme = "Cookies",
-
+                //SignInScheme = "Cookies",
+                SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
                 Authority = "http://localhost:50274",
                 RequireHttpsMetadata = false,
 

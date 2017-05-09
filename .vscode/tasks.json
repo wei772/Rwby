@@ -15,7 +15,7 @@
         {
             "taskName": "buildWeb",
             "args": [
-                " build ${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.Api\\Rwby.Global.Web.csproj"
+                " build ${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.Web\\Rwby.Global.Web.csproj"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
