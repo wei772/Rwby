@@ -1,13 +1,21 @@
 {
-    "version": "0.1.0",
+    "version": "2.0.0",
     "command": "dotnet",
     "isShellCommand": true,
-    "args": [],
+    "suppressTaskName": true,
     "tasks": [
         {
-            "taskName": "build",
+            "taskName": "buildApi",
             "args": [
-                "${workspaceRoot}\\Rwby.sln"
+                " build ${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.Api\\Rwby.Global.Api.csproj"
+            ],
+            "isBuildCommand": true,
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "buildWeb",
+            "args": [
+                " build ${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.Api\\Rwby.Global.Web.csproj"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
