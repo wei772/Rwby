@@ -2,20 +2,20 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (web)",
+            "name": "Launch (Global.Api)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/bin/Debug/<target-framework>/<project-name.dll>",
+            "program": "${workspaceRoot}/src/Rwby.Global/Rwby.Global.Api/bin/Debug/netcoreapp1.1/Rwby.Global.Api.dll",
             "args": [],
-            "cwd": "${workspaceRoot}",
+            "cwd": "${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.Api",
             "stopAtEntry": false,
             "launchBrowser": {
                 "enabled": true,
-                "args": "${auto-detect-url}",
+                "args": "http://localhost:50707/",
                 "windows": {
                     "command": "cmd.exe",
-                    "args": "/C start ${auto-detect-url}"
+                    "args": "/C start http://localhost:50707/"
                 },
                 "osx": {
                     "command": "open"
@@ -25,28 +25,28 @@
                 }
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Production"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceRoot}/Views"
             }
         },
         {
-            "name": ".NET Core Launch (web)",
+            "name": "Launch (Global.Web)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.Api\\bin\\Debug\\netcoreapp1.1\\Rwby.Global.Api.dll",
+            "program": "${workspaceRoot}/src/Rwby.Global/Rwby.Global.Web/bin/Debug/netcoreapp1.1/Rwby.Global.Web.dll",
             "args": [],
-            "cwd": "${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.Api",
+            "cwd": "${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.Web",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {
                 "enabled": true,
-                "args": "${auto-detect-url}",
+                "args": "http://localhost:50274/",
                 "windows": {
                     "command": "cmd.exe",
-                    "args": "/C start ${auto-detect-url}"
+                    "args": "/C start http://localhost:50274/"
                 },
                 "osx": {
                     "command": "open"
@@ -56,7 +56,7 @@
                 }
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Production"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceRoot}/Views"

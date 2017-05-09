@@ -8,12 +8,20 @@ namespace Rwby.Global.Api
     {
         public static void Main(string[] args)
         {
+
+            //  var config = new ConfigurationBuilder()
+            //     .SetBasePath(Directory.GetCurrentDirectory())
+            //     .AddJsonFile("hosting.json", optional: true)
+            //     .Build();
+
             var host = new WebHostBuilder()
+                //.UseConfiguration(config)
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .UseApplicationInsights()
+                .UseUrls("http://localhost:50707/")
                 .Build();
 
             host.Run();

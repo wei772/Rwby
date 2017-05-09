@@ -17,6 +17,7 @@ namespace Rwby.Global.Web
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .UseApplicationInsights()
+                .UseUrls("http://localhost:50274/")
                 .Build();
 
             host.Run();

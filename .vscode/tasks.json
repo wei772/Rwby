@@ -7,7 +7,7 @@
         {
             "taskName": "build",
             "args": [
-                "${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.Api\\Rwby.Global.Api.csproj"
+                "${workspaceRoot}\\Rwby.sln"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
