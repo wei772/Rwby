@@ -2,7 +2,7 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using Rwby.Global.ApiClient;
-using Clients;
+using IdentityConstants;
 
 namespace Rwby.Global.Test
 {
@@ -19,7 +19,7 @@ namespace Rwby.Global.Test
 
             var result = await manager.CallServiceAsync(response.AccessToken, "user/getusers");
 
-            Console.WriteLine("result");
+            Console.WriteLine(result);
 
         }
 
@@ -34,7 +34,7 @@ namespace Rwby.Global.Test
 
             var result = manager.CallServiceAsync(response.AccessToken, "user/getuser?userId=2f63448e-41a5-4757-a0a7-03d1ecf30696");
 
-            Console.WriteLine("result");
+            Console.WriteLine(result);
         }
 
     }

@@ -33,13 +33,6 @@ namespace Rwby.Global.Api
                 .AddGlobalService()
                 .AddMvc();
 
-            services.AddIdentityServer()
-                .AddTemporarySigningCredential()
-                .AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
-                .AddInMemoryClients(IdentityServerConfig.GetClients())
-                .AddTestUsers(IdentityServerConfig.GetUsers())
-                ;
-
 
             ConfigureDbContext(services);
         }
@@ -75,14 +68,10 @@ namespace Rwby.Global.Api
 
             app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
             {
-                Authority = "http://localhost:50707",
+                Authority = "http://localhost:50274",
                 RequireHttpsMetadata = false,
-                AllowedScopes = {"GetUsers","GetUser"}
+                AllowedScopes = { "UserApi" }
             });
-
-       
-
-            app.UseIdentityServer();
 
 
             app.UseMvc

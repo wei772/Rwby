@@ -15,8 +15,7 @@ namespace Rwby.Global.Core
         {
             return new List<ApiResource>
             {
-                new ApiResource("GetUser", "My API"),
-                new ApiResource("GetUsers", "My API")
+                new ApiResource("UserApi", "User API")
             };
         }
 
@@ -39,7 +38,7 @@ namespace Rwby.Global.Core
                     },
 
                     // scopes that client has access to
-                    AllowedScopes = { "GetUsers" }
+                    AllowedScopes = { "UserApi" }
                 },
 
                 new Client
@@ -51,7 +50,7 @@ namespace Rwby.Global.Core
                     {
                         new Secret("secret".Sha256())
                     },
-                    AllowedScopes = { "GetUser" }
+                    AllowedScopes = { "UserApi" }
                 },
 
                 
@@ -62,19 +61,25 @@ namespace Rwby.Global.Core
                 {
                     ClientId = "mvc",
                     ClientName = "MVC Client",
-                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
 
+                     ClientSecrets =
+                        {
+                         new Secret("secret".Sha256())
+                        },
                     // where to redirect to after login
-                    RedirectUris = { "http://localhost:50274/signin-oidc" },
+                    RedirectUris = { "http://localhost:50111/signin-oidc" },
 
                     // where to redirect to after logout
-                    PostLogoutRedirectUris = { "http://localhost:50274/signout-callback-oidc" },
+                    PostLogoutRedirectUris = { "http://localhost:50111/signout-callback-oidc" },
 
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
-                    }
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "UserApi"
+                    },
+                    AllowOfflineAccess = true
                 }
             };
         }

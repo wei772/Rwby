@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Text;
 
-namespace Clients
+namespace IdentityConstants
 {
     public static class TokenResponseExtensions
     {

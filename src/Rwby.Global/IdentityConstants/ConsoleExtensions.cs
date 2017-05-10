@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Clients
+namespace IdentityConstants
 {
     public static class ConsoleExtensions
     {

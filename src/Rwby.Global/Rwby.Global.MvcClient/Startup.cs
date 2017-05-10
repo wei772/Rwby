@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using IdentityConstants;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.IdentityModel.Tokens.Jwt;
-using Rwby.Global.Core;
-using IdentityServer4;
 
-namespace Rwby.Global.Web
+namespace MvcClient
 {
     public class Startup
     {
@@ -19,64 +14,46 @@ namespace Rwby.Global.Web
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
             Configuration = builder.Build();
         }
 
         public IConfigurationRoot Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
             services.AddMvc();
-
-
-            services.AddIdentityServer()
-                .AddTemporarySigningCredential()
-                .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
-                .AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
-                .AddInMemoryClients(IdentityServerConfig.GetClients())
-                .AddTestUsers(IdentityServerConfig.GetUsers())
-            ;
-
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
-
-            app.UseIdentityServer();
-
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationScheme = "Cookies"
             });
 
-
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-
             app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
             {
                 AuthenticationScheme = "oidc",
-                //SignInScheme = "Cookies",
-                SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
+                SignInScheme = "Cookies",
+
                 Authority = "http://localhost:50274",
                 RequireHttpsMetadata = false,
 
@@ -86,9 +63,11 @@ namespace Rwby.Global.Web
                 ResponseType = "code id_token",
                 Scope = { "UserApi", "offline_access" },
 
+                GetClaimsFromUserInfoEndpoint = true,
                 SaveTokens = true
             });
-
+            
+            app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }
     }

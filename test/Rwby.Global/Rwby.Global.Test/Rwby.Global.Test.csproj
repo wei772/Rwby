@@ -5,12 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="IdentityModel" Version="2.8.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.1.11" />
     <PackageReference Include="MSTest.TestFramework" Version="1.1.11" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Rwby.Global\IdentityConstants\IdentityConstants.csproj" />
     <ProjectReference Include="..\..\..\src\Rwby.Global\Rwby.Global.ApiClient\Rwby.Global.ApiClient.csproj" />
   </ItemGroup>
 

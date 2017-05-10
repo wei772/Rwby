@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using IdentityModel.Client;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
-using Clients;
+using IdentityConstants;
 
 namespace Rwby.Global.ApiClient
 {
@@ -25,7 +25,7 @@ namespace Rwby.Global.ApiClient
                 "client",
                 "secret");
 
-            var token = await client.RequestClientCredentialsAsync("GetUsers");
+            var token = await client.RequestClientCredentialsAsync("UserApi");
             return token;
         }
 
@@ -37,7 +37,7 @@ namespace Rwby.Global.ApiClient
             if (disco.IsError) throw new Exception(disco.Error);
 
             var tokenClient = new TokenClient(disco.TokenEndpoint, "ro.client", "secret");
-            var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync("alice", "password", "GetUser");
+            var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync("alice", "password", "UserApi");
 
             if (tokenResponse.IsError)
             {
