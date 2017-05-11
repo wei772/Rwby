@@ -5,7 +5,7 @@
             "name": "Launch (Global.Api)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "buildApi",
+            "preLaunchTask": "build Api",
             "program": "${workspaceRoot}/src/Rwby.Global/Rwby.Global.Api/bin/Debug/netcoreapp1.1/Rwby.Global.Api.dll",
             "args": [],
             "cwd": "${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.Api",
@@ -25,7 +25,38 @@
                 }
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Production"
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceRoot}/Views"
+            }
+        },
+        {
+            "name": "Launch (Global.MvcClient)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build MvcClient",
+            "program": "${workspaceRoot}/src/Rwby.Global/Rwby.Global.MvcClient/bin/Debug/netcoreapp1.1/Rwby.Global.MvcClient.dll",
+            "args": [],
+            "cwd": "${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.MvcClient",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart",
+            "launchBrowser": {
+                "enabled": true,
+                "args": "http://localhost:50111/",
+                "windows": {
+                    "command": "cmd.exe",
+                    "args": "/C start http://localhost:50111/"
+                },
+                "osx": {
+                    "command": "open"
+                },
+                "linux": {
+                    "command": "xdg-open"
+                }
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceRoot}/Views"
@@ -35,7 +66,7 @@
             "name": "Launch (Global.Web)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "buildWeb",
+            "preLaunchTask": "build Web",
             "program": "${workspaceRoot}/src/Rwby.Global/Rwby.Global.Web/bin/Debug/netcoreapp1.1/Rwby.Global.Web.dll",
             "args": [],
             "cwd": "${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.Web",
@@ -56,7 +87,7 @@
                 }
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Production"
+                "ASPNETCORE_ENVIRONMENT": "Development"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceRoot}/Views"

@@ -5,7 +5,7 @@
     "suppressTaskName": true,
     "tasks": [
         {
-            "taskName": "buildApi",
+            "taskName": "build Api",
             "args": [
                 " build ${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.Api\\Rwby.Global.Api.csproj"
             ],
@@ -13,9 +13,25 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "taskName": "buildWeb",
+            "taskName": "build Web",
             "args": [
                 " build ${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.Web\\Rwby.Global.Web.csproj"
+            ],
+            "isBuildCommand": true,
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "build MvcClient",
+            "args": [
+                " build ${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.MvcClient\\Rwby.Global.MvcClient.csproj"
+            ],
+            "isBuildCommand": true,
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "build Test",
+            "args": [
+                " build ${workspaceRoot}\\Test\\Rwby.Global\\Rwby.Global.Test\\Rwby.Global.Test.csproj"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
