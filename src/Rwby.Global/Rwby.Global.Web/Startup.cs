@@ -10,6 +10,9 @@ using Microsoft.Extensions.Logging;
 using System.IdentityModel.Tokens.Jwt;
 using Rwby.Global.Core;
 using IdentityServer4;
+using NLog.Extensions.Logging;
+using NLog.Web;
+using Microsoft.AspNetCore.Http;
 
 namespace Rwby.Global.Web
 {
@@ -23,6 +26,8 @@ namespace Rwby.Global.Web
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            env.ConfigureNLog("nlog.config");
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -42,13 +47,23 @@ namespace Rwby.Global.Web
                 .AddTestUsers(IdentityServerConfig.GetUsers())
             ;
 
+            //call this in case you need aspnet-user-authtype/aspnet-user-identity
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            // loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            // loggerFactory.AddDebug();
+
+            //add NLog to ASP.NET Core
+            loggerFactory.AddNLog();
+
+            //add NLog.Web
+            app.AddNLogWeb();
+
+            
 
             if (env.IsDevelopment())
             {
