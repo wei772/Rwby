@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Rwby.Global.Service
 {
-    public class GlobalContext : IdentityDbContext<UserEntity>
+    public class GlobalContext : IdentityDbContext<ApplicationUser>
     {
         public GlobalContext()
         {

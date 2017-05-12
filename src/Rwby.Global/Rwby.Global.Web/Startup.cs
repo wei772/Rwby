@@ -10,6 +10,11 @@ using Microsoft.Extensions.Logging;
 using System.IdentityModel.Tokens.Jwt;
 using Rwby.Global.Core;
 using IdentityServer4;
+using Rwby.Global.Service;
+using Rwby.Global.Web.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Rwby.Global.Web.Services;
 
 namespace Rwby.Global.Web
 {
@@ -30,6 +35,19 @@ namespace Rwby.Global.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            // Add framework services.
+            services.AddDbContext<GlobalContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("GlobalConnection")));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<GlobalContext>()
+                .AddDefaultTokenProviders();
+
+
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, AuthMessageSender>();
+
             // Add framework services.
             services.AddMvc();
 
@@ -39,7 +57,7 @@ namespace Rwby.Global.Web
                 .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
                 .AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
                 .AddInMemoryClients(IdentityServerConfig.GetClients())
-                .AddTestUsers(IdentityServerConfig.GetUsers())
+                .AddAspNetIdentity<ApplicationUser>();
             ;
 
         }
@@ -53,6 +71,7 @@ namespace Rwby.Global.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                //app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
             }
             else
@@ -61,6 +80,8 @@ namespace Rwby.Global.Web
             }
 
             app.UseStaticFiles();
+
+            app.UseIdentity();
 
             app.UseIdentityServer();
 

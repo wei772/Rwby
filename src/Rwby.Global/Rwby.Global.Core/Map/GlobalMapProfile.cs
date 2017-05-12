@@ -11,6 +11,8 @@ namespace Rwby.Global.Core
         {
             CreateMap<User, UserModel>();
             CreateMap<UserEntity, User>();
+            CreateMap<ApplicationUser, User>();
+
         }
 
 

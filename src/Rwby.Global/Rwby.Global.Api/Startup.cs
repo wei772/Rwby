@@ -42,7 +42,7 @@ namespace Rwby.Global.Api
         public void ConfigureDbContext(IServiceCollection services)
         {
             services.AddDbContext<GlobalContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("UserConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("GlobalConnection")));
 
             services.AddIdentity<User, IdentityRole>()
                .AddEntityFrameworkStores<GlobalContext>()

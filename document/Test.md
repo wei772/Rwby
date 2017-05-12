@@ -13,3 +13,8 @@ public Core.User GetUser(Guid userId)
 public IList<Core.User> GetUsers()
 ```
 
+
+
+```
+demo 账号: 772555190@qq.com   Li123456#
+```
