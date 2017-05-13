@@ -213,3 +213,7 @@ _Pvt_Extensions/
 ModelManifest.xml
 *.opendb
 *.db
+
+# ASP.NET Core
+
+wwwroot/lib/ 

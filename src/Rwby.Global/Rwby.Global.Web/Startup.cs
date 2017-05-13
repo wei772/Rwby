@@ -48,6 +48,18 @@ namespace Rwby.Global.Web
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
+
+            services.AddCors(options =>
+            {
+                // this defines a CORS policy called "default"
+                options.AddPolicy("default", policy =>
+                {
+                    policy.WithOrigins("http://localhost:50115")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
             // Add framework services.
             services.AddMvc();
 
@@ -78,6 +90,8 @@ namespace Rwby.Global.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseCors("default");
 
             app.UseStaticFiles();
 

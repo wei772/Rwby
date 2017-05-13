@@ -34,6 +34,19 @@ namespace Rwby.Global.Api
                 .AddMvc();
 
 
+
+            services.AddCors(options =>
+            {
+                // this defines a CORS policy called "default"
+                options.AddPolicy("default", policy =>
+                {
+                    policy.WithOrigins("http://localhost:50115")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
+
             ConfigureDbContext(services);
         }
 
@@ -65,6 +78,8 @@ namespace Rwby.Global.Api
                 app.UseDeveloperExceptionPage();
             }
 
+
+            app.UseCors("default");
 
             app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
             {

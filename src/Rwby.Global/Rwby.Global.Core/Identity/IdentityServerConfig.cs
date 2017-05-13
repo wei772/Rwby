@@ -80,6 +80,26 @@ namespace Rwby.Global.Core
                         "UserApi"
                     },
                     AllowOfflineAccess = true
+                },
+
+
+                new Client
+                {
+                    ClientId = "js",
+                    ClientName = "JavaScript Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris =           { "http://localhost:50115/callback.html" },
+                    PostLogoutRedirectUris = { "http://localhost:50115/index.html" },
+                    AllowedCorsOrigins =     { "http://localhost:50115" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "UserApi"
+                    }
                 }
             };
         }
