@@ -13,7 +13,7 @@ namespace Rwby.Global.Service
         {
         }
 
-        public GlobalContext(DbContextOptions options) : base(options)
+        public GlobalContext(DbContextOptions<GlobalContext> options) : base(options)
         {
         }
 

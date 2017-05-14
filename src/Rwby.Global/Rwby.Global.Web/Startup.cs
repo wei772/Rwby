@@ -37,13 +37,16 @@ namespace Rwby.Global.Web
 
         public IConfigurationRoot Configuration { get; }
 
+        private string GlobalConnection { get; set; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            GlobalConnection = Configuration.GetConnectionString("GlobalConnection");
 
             // Add framework services.
             services.AddDbContext<GlobalContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("GlobalConnection")));
+                options.UseSqlServer(GlobalConnection));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<GlobalContext>()
@@ -71,10 +74,14 @@ namespace Rwby.Global.Web
 
             services.AddIdentityServer()
                 .AddTemporarySigningCredential()
-                .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
-                .AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
-                .AddInMemoryClients(IdentityServerConfig.GetClients())
-                .AddAspNetIdentity<ApplicationUser>();
+                        //.AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
+                        //.AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
+                        //.AddInMemoryClients(IdentityServerConfig.GetClients())
+                        .AddConfigurationStore(builder =>
+                            builder.UseSqlServer(GlobalConnection))
+                        .AddOperationalStore(builder =>
+                            builder.UseSqlServer(GlobalConnection))
+                        .AddAspNetIdentity<ApplicationUser>();
             ;
 
             //call this in case you need aspnet-user-authtype/aspnet-user-identity
@@ -93,7 +100,7 @@ namespace Rwby.Global.Web
             //add NLog.Web
             app.AddNLogWeb();
 
-            
+
 
             if (env.IsDevelopment())
             {
