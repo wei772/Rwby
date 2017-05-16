@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  rwby.global.web:
+    image: rwby.global.web
+    build:
+      context: ./src/Rwby.Global/Rwby.Global.Web
+      dockerfile: Dockerfile
