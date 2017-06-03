@@ -74,15 +74,22 @@ namespace Rwby.Identity
 
             services.AddIdentityServer()
                 .AddTemporarySigningCredential()
-                        //.AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
-                        //.AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
-                        //.AddInMemoryClients(IdentityServerConfig.GetClients())
-                        .AddConfigurationStore(builder =>
-                            builder.UseSqlServer(GlobalConnection))
-                        .AddOperationalStore(builder =>
-                            builder.UseSqlServer(GlobalConnection))
+                        .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
+                        .AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
+                        .AddInMemoryClients(IdentityServerConfig.GetClients())
+                        //.AddConfigurationStore(builder =>
+                        //    builder.UseSqlServer(GlobalConnection))
+                        //.AddOperationalStore(builder =>
+                        //    builder.UseSqlServer(GlobalConnection))
                         .AddAspNetIdentity<ApplicationUser>();
             ;
+
+            // Configure named auth policies that map directly to OAuth2.0 scopes
+            services.AddAuthorization(c =>
+            {
+                c.AddPolicy("readAccess", p => p.RequireClaim("scope", "readAccess"));
+                c.AddPolicy("writeAccess", p => p.RequireClaim("scope", "writeAccess"));
+            });
 
             //call this in case you need aspnet-user-authtype/aspnet-user-identity
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

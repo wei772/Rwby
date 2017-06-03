@@ -15,8 +15,19 @@ namespace Rwby.Identity.Core
         {
             return new List<ApiResource>
             {
-                new ApiResource("UserApi", "User API")
-            };
+                new ApiResource("UserApi", "User API"),
+
+                new ApiResource
+            {
+                Name = "api",
+                DisplayName = "API",
+                Scopes = new[]
+                {
+                    new Scope("readAccess", "Access read operations"),
+                    new Scope("writeAccess", "Access write operations")
+                }
+            }
+        };
         }
 
 
@@ -100,6 +111,18 @@ namespace Rwby.Identity.Core
                         IdentityServerConstants.StandardScopes.Profile,
                         "UserApi"
                     }
+                },
+
+
+                new Client
+                {
+                    AllowAccessTokensViaBrowser = true,
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowedScopes = new[] { "UserApi", "readAccess", "writeAccess" },
+                    ClientId = "swagger-ui",
+                    ClientName = "Swagger UI",
+                    ClientSecrets = new[] { new Secret("swagger-ui-secret".Sha256()) },
+                    RedirectUris = new[] { "http://localhost:40707/swagger/o2c.html" }
                 }
             };
         }

@@ -8,7 +8,11 @@ using System.Threading.Tasks;
 namespace Rwby.Users.Api
 {
 
+    /// <summary>
+    /// user controller
+    /// </summary>
     [Authorize]
+    [Route("api/v1/[controller]")]
     public class UserController : Controller
     {
 
@@ -20,19 +24,29 @@ namespace Rwby.Users.Api
         }
 
 
-
+        /// <summary>
+        /// get users
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public Task<User> GetUser(string userId)
-        {
-            return _userService.GetUser(userId);
-        }
-
-
-        [HttpGet]
+        [Route("[action]")]
         public Task<IList<User>> GetUsers()
         {
             return _userService.GetUsers();
         }
+
+        /// <summary>
+        /// get user
+        /// </summary>
+        /// <param name="userId">user id</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("[action]")]
+        public Task<User> GetUser([FromQuery]string userId)
+        {
+            return _userService.GetUser(userId);
+        }
+
 
 
     }
