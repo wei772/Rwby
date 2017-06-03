@@ -1,0 +1,18 @@
+
+## request and action
+
+## getuser
+http://localhost:40707/api/user/getuser?userId=eb9316d9-4e5c-45fb-af41-50c193140012
+
+
+
+### getusers
+
+http://localhost:40707/api/user/getusers
+
+
+
+
+## demo 账号: 772555190@qq.com   Li123456#
+
+## 7725551901@qq.com

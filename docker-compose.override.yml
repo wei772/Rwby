@@ -1,8 +1,0 @@
-version: '2.1'
-
-services:
-  rwby.global.web:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "50274:80"
