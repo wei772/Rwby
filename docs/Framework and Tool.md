@@ -17,6 +17,11 @@
 
 * NLog4
 
+* IdentityServer4 + IdentityModel
+
+* eShopOnContainers 
+
+
 
 ## Other
 
