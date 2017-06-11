@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Infrastructure\Rwby.DataAccess\Rwby.DataAccess.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Rwby.Identity\Rwby.Identity.csproj" />
   </ItemGroup>
 
 </Project>

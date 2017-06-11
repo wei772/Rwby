@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Rwby.Identity.Service
 {
-    public class GlobalStoreOptions
+    public class IdentityStoreOptions
     {
     }
 }

@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Users.Service", "src\Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.ApiClient", "src\Clients\Identity\Identity.ApiClient\Identity.ApiClient.csproj", "{1D2A6A62-5C44-49F3-8464-0BB1EEC6B96C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rwby.Identity", "src\Infrastructure\Rwby.Identity\Rwby.Identity.csproj", "{1E5CD25D-1A83-4A66-AE79-509A1909E15A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{1D2A6A62-5C44-49F3-8464-0BB1EEC6B96C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D2A6A62-5C44-49F3-8464-0BB1EEC6B96C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D2A6A62-5C44-49F3-8464-0BB1EEC6B96C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E5CD25D-1A83-4A66-AE79-509A1909E15A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E5CD25D-1A83-4A66-AE79-509A1909E15A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E5CD25D-1A83-4A66-AE79-509A1909E15A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E5CD25D-1A83-4A66-AE79-509A1909E15A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,5 +136,6 @@ Global
 		{8FBF3F07-342D-4EE7-9DB5-E95776B32879} = {D39C393F-F1FD-4BD2-B417-DEACD49CAD1A}
 		{6B78DE00-0FA4-4994-A197-91161B018883} = {D39C393F-F1FD-4BD2-B417-DEACD49CAD1A}
 		{1D2A6A62-5C44-49F3-8464-0BB1EEC6B96C} = {EF457364-981A-4715-BEE7-1996AF8A7A58}
+		{1E5CD25D-1A83-4A66-AE79-509A1909E15A} = {FFD5003A-0FE6-4028-B73A-DE4C8D46171C}
 	EndGlobalSection
 EndGlobal

@@ -32,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Infrastructure\Rwby.DataAccess\Rwby.DataAccess.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Rwby.Identity\Rwby.Identity.csproj" />
     <ProjectReference Include="..\Identity.Core\Identity.Core.csproj" />
     <ProjectReference Include="..\Identity.Service\Identity.Service.csproj" />
   </ItemGroup>

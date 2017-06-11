@@ -45,11 +45,11 @@ namespace Rwby.Identity
             GlobalConnection = Configuration.GetConnectionString("GlobalConnection");
 
             // Add framework services.
-            services.AddDbContext<GlobalContext>(options =>
+            services.AddDbContext<IdentityContext>(options =>
                 options.UseSqlServer(GlobalConnection));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<GlobalContext>()
+            services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityContext>()
                 .AddDefaultTokenProviders();
 
 
@@ -70,6 +70,7 @@ namespace Rwby.Identity
 
             // Add framework services.
             services.AddMvc();
+           // services.AddApiVersioning();
 
 
             services.AddIdentityServer()
@@ -81,7 +82,7 @@ namespace Rwby.Identity
                 //    builder.UseSqlServer(GlobalConnection))
                 //.AddOperationalStore(builder =>
                 //    builder.UseSqlServer(GlobalConnection))
-                .AddAspNetIdentity<ApplicationUser>();
+                .AddAspNetIdentity<AppUser>();
             ;
 
             // Configure named auth policies that map directly to OAuth2.0 scopes
@@ -154,6 +155,7 @@ namespace Rwby.Identity
             });
 
             app.UseMvcWithDefaultRoute();
+
         }
     }
 }

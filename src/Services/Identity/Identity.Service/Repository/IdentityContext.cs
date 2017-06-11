@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Rwby.AspNetCore.Identity;
 using Rwby.Identity.Core;
 using Rwby.Identity.Service;
 using System;
@@ -8,13 +9,14 @@ using System.Text;
 
 namespace Rwby.Identity.Service
 {
-    public class GlobalContext : IdentityDbContext<ApplicationUser>
+    public class IdentityContext : IdentityDbContext<AppUser, AppRole, string, AppPermission, AppRolePermission, AppUserPermission>
     {
-        public GlobalContext()
+
+        public IdentityContext(DbContextOptions options) : base(options)
         {
         }
 
-        public GlobalContext(DbContextOptions<GlobalContext> options) : base(options)
+        public IdentityContext(DbContextOptions<IdentityContext> options) : base(options)
         {
         }
 

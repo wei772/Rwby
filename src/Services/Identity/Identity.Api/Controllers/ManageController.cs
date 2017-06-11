@@ -9,6 +9,7 @@ using Rwby.Identity.Models.ManageViewModels;
 using Rwby.Identity.Services;
 using IdentityServer4.Quickstart.UI;
 using Rwby.Identity.Core;
+using Rwby.AspNetCore.Mvc;
 
 namespace Rwby.Identity.Controllers
 {
@@ -16,15 +17,15 @@ namespace Rwby.Identity.Controllers
     [SecurityHeaders]
     public class ManageController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
 
         public ManageController(
-        UserManager<ApplicationUser> userManager,
-        SignInManager<ApplicationUser> signInManager,
+        UserManager<AppUser> userManager,
+        SignInManager<AppUser> signInManager,
         IEmailSender emailSender,
         ISmsSender smsSender,
         ILoggerFactory loggerFactory)
@@ -88,6 +89,8 @@ namespace Rwby.Identity.Controllers
 
         //
         // GET: /Manage/AddPhoneNumber
+
+        [RequiresPermission("AddPhoneNumber")]
         public IActionResult AddPhoneNumber()
         {
             return View();
@@ -351,7 +354,7 @@ namespace Rwby.Identity.Controllers
             Error
         }
 
-        private Task<ApplicationUser> GetCurrentUserAsync()
+        private Task<AppUser> GetCurrentUserAsync()
         {
             return _userManager.GetUserAsync(HttpContext.User);
         }
