@@ -20,8 +20,8 @@ namespace Rwby.AspNetCore.Identity
     }
 
 
-    public abstract class IdentityDbContext<TUser, TRole, TKey, TUserClaim, TUserRole, TUserLogin, TRoleClaim, TUserToken, TPermission, TRolePermission, TUserPermission> : DbContext
-
+    public abstract class IdentityDbContext<TUser, TRole, TKey, TUserClaim, TUserRole, TUserLogin, TRoleClaim, TUserToken, TPermission, TRolePermission, TUserPermission>
+        : IdentityDbContext<TUser, TRole, TKey, TUserClaim, TUserRole, TUserLogin, TRoleClaim, TUserToken>
         where TUser : IdentityUser<TKey, TUserClaim, TUserRole, TUserLogin>
         where TRole : IdentityRole<TKey, TUserRole, TRoleClaim>
         where TKey : IEquatable<TKey>
@@ -47,6 +47,8 @@ namespace Rwby.AspNetCore.Identity
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+
             builder.Entity<TPermission>(b =>
             {
                 b.HasKey(r => r.Id);
@@ -65,14 +67,14 @@ namespace Rwby.AspNetCore.Identity
 
             builder.Entity<TUserPermission>(b =>
             {
-                b.HasKey(rc => rc.Id);
+                b.HasKey(r => new { r.UserId, r.PermissionId });
                 b.ToTable("UserPermissions");
             });
 
 
             builder.Entity<TRolePermission>(b =>
             {
-                b.HasKey(rc => rc.Id);
+                b.HasKey(r => new { r.RoleId, r.PermissionId });
                 b.ToTable("RolePermissions");
             });
 

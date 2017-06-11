@@ -21,12 +21,13 @@ namespace Rwby.AspNetCore.Authorization
         }
     }
 
-    public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionAuthorizationRequirement>
+    public class PermissionAuthorizationHandler<TPermission> : AuthorizationHandler<PermissionAuthorizationRequirement>
+    where TPermission: IdentityPermission
     {
         private readonly ILogger _logger;
-        private readonly PermissionManager<IdentityPermission> _permissionManager;
+        private readonly PermissionManager<TPermission> _permissionManager;
 
-        public PermissionAuthorizationHandler(ILogger<PermissionAuthorizationHandler> logger, PermissionManager<IdentityPermission> permissionManager)
+        public PermissionAuthorizationHandler(ILogger<PermissionAuthorizationHandler<TPermission>> logger, PermissionManager<TPermission> permissionManager)
         {
             _logger = logger;
             _permissionManager = permissionManager;

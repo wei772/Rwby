@@ -18,6 +18,9 @@ using Rwby.Identity.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Rwby.Identity.Services;
+using Microsoft.AspNetCore.Authorization;
+using Rwby.AspNetCore.Authorization;
+using Rwby.AspNetCore.Identity;
 
 namespace Rwby.Identity
 {
@@ -48,7 +51,7 @@ namespace Rwby.Identity
             services.AddDbContext<IdentityContext>(options =>
                 options.UseSqlServer(GlobalConnection));
 
-            services.AddIdentity<AppUser, IdentityRole>()
+            services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<IdentityContext>()
                 .AddDefaultTokenProviders();
 
@@ -70,7 +73,7 @@ namespace Rwby.Identity
 
             // Add framework services.
             services.AddMvc();
-           // services.AddApiVersioning();
+            // services.AddApiVersioning();
 
 
             services.AddIdentityServer()
@@ -91,6 +94,15 @@ namespace Rwby.Identity
                 c.AddPolicy("readAccess", p => p.RequireClaim("scope", "readAccess"));
                 c.AddPolicy("writeAccess", p => p.RequireClaim("scope", "writeAccess"));
             });
+
+            services.AddScoped<IPermissionStore<AppPermission>, PermissionStore<string, AppPermission
+                , IdentityContext, AppRole, AppUser, IdentityUserRole<string>, AppRolePermission, AppUserPermission>>();
+
+
+            
+            services.AddScoped<PermissionErrorDescriber>();
+            services.AddScoped<PermissionManager<AppPermission>>();
+            services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler<AppPermission>>();
 
             //call this in case you need aspnet-user-authtype/aspnet-user-identity
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

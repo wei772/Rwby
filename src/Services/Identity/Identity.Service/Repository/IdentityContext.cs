@@ -12,10 +12,7 @@ namespace Rwby.Identity.Service
     public class IdentityContext : IdentityDbContext<AppUser, AppRole, string, AppPermission, AppRolePermission, AppUserPermission>
     {
 
-        public IdentityContext(DbContextOptions options) : base(options)
-        {
-        }
-
+  
         public IdentityContext(DbContextOptions<IdentityContext> options) : base(options)
         {
         }
