@@ -2,13 +2,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch (Global.Api)",
+            "name": "Launch (Identity.Api)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build Api",
-            "program": "${workspaceRoot}/src/Rwby.Global/Rwby.Global.Api/bin/Debug/netcoreapp1.1/Rwby.Global.Api.dll",
+            "preLaunchTask": "build IdentityApi",
+            "program": "${workspaceRoot}/src/Services/Identity/Identity.Api/bin/Debug/netcoreapp1.1/Identity.Api.dll",
             "args": [],
-            "cwd": "${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.Api",
+            "cwd": "${workspaceRoot}\\src\\Services\\Identity\\Identity.Api",
             "stopAtEntry": false,
             "launchBrowser": {
                 "enabled": true,
@@ -32,13 +32,13 @@
             }
         },
         {
-            "name": "Launch (Global.MvcClient)",
+            "name": "Launch (MvcClient)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build MvcClient",
-            "program": "${workspaceRoot}/src/Rwby.Global/Rwby.Global.MvcClient/bin/Debug/netcoreapp1.1/Rwby.Global.MvcClient.dll",
+            "program": "${workspaceRoot}/src/Clients/Identity/Identity.MvcClient/bin/Debug/netcoreapp1.1/Identity.MvcClient.dll",
             "args": [],
-            "cwd": "${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.MvcClient",
+            "cwd": "${workspaceRoot}\\src\\Clients\\Identity\\Identity.MvcClient",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {
@@ -63,13 +63,13 @@
             }
         },
         {
-            "name": "Launch (Global.Web)",
+            "name": "Launch (UserApi)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build Web",
-            "program": "${workspaceRoot}/src/Rwby.Global/Rwby.Global.Web/bin/Debug/netcoreapp1.1/Rwby.Global.Web.dll",
+            "preLaunchTask": "build UserApi",
+            "program": "${workspaceRoot}/src/Services/Users/Users.Api/bin/Debug/netcoreapp1.1/Users.Api.dll",
             "args": [],
-            "cwd": "${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.Web",
+            "cwd": "${workspaceRoot}\\src\\Services\\Users\\Users.Api",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {

@@ -5,17 +5,17 @@
     "suppressTaskName": true,
     "tasks": [
         {
-            "taskName": "build Api",
+            "taskName": "build IdentityApi",
             "args": [
-                " build ${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.Api\\Rwby.Global.Api.csproj"
+                " build ${workspaceRoot}\\src\\Services\\Identity\\Identity.Api\\Identity.Api.csproj"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
         },
         {
-            "taskName": "build Web",
+            "taskName": "build UserApi",
             "args": [
-                " build ${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.Web\\Rwby.Global.Web.csproj"
+                " build ${workspaceRoot}\\src\\Services\\Users\\Users.Api\\User.Api.csproj"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
@@ -23,18 +23,18 @@
         {
             "taskName": "build MvcClient",
             "args": [
-                " build ${workspaceRoot}\\src\\Rwby.Global\\Rwby.Global.MvcClient\\Rwby.Global.MvcClient.csproj"
-            ],
-            "isBuildCommand": true,
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "taskName": "build Test",
-            "args": [
-                " build ${workspaceRoot}\\Test\\Rwby.Global\\Rwby.Global.Test\\Rwby.Global.Test.csproj"
+                " build ${workspaceRoot}\\src\\Clients\\Identity\\Identity.MvcClient\\Identity.MvcClient.csproj"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
         }
+        // {
+        //     "taskName": "build Test",
+        //     "args": [
+        //         " build ${workspaceRoot}\\Test\\Rwby.Global\\Rwby.Global.Test\\Rwby.Global.Test.csproj"
+        //     ],
+        //     "isBuildCommand": true,
+        //     "problemMatcher": "$msCompile"
+        // }
     ]
 }
