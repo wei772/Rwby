@@ -106,7 +106,7 @@ namespace Rwby.AspNetCore.Identity
 
 
             return userPermissions
-                .Union(userRolePermissions, new PermissonEqualityComparer<TPermission>())
+                .Union(userRolePermissions, new PermissonEqualityComparer<TPermission, TKey>())
                 .ToList();
 
         }

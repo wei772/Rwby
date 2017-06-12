@@ -40,16 +40,16 @@ namespace Rwby.Identity
 
         public IConfigurationRoot Configuration { get; }
 
-        private string GlobalConnection { get; set; }
+        private string IdentityConnection { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            GlobalConnection = Configuration.GetConnectionString("GlobalConnection");
+            IdentityConnection = Configuration.GetConnectionString("IdentityConnection");
 
             // Add framework services.
             services.AddDbContext<IdentityContext>(options =>
-                options.UseSqlServer(GlobalConnection));
+                options.UseSqlServer(IdentityConnection, b => b.MigrationsAssembly("Identity.Api")));
 
             services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<IdentityContext>()
@@ -97,9 +97,6 @@ namespace Rwby.Identity
 
             services.AddScoped<IPermissionStore<AppPermission>, PermissionStore<string, AppPermission
                 , IdentityContext, AppRole, AppUser, IdentityUserRole<string>, AppRolePermission, AppUserPermission>>();
-
-
-            
             services.AddScoped<PermissionErrorDescriber>();
             services.AddScoped<PermissionManager<AppPermission>>();
             services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler<AppPermission>>();
