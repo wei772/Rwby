@@ -21,6 +21,7 @@ using Rwby.Identity.Services;
 using Microsoft.AspNetCore.Authorization;
 using Rwby.AspNetCore.Authorization;
 using Rwby.AspNetCore.Identity;
+using Rwby.Http;
 
 namespace Rwby.Identity
 {
@@ -88,22 +89,28 @@ namespace Rwby.Identity
                 .AddAspNetIdentity<AppUser>();
             ;
 
+
+
+
+
             // Configure named auth policies that map directly to OAuth2.0 scopes
             services.AddAuthorization(c =>
-            {
-                c.AddPolicy("readAccess", p => p.RequireClaim("scope", "readAccess"));
-                c.AddPolicy("writeAccess", p => p.RequireClaim("scope", "writeAccess"));
-            });
+        {
+            c.AddPolicy("readAccess", p => p.RequireClaim("scope", "readAccess"));
+            c.AddPolicy("writeAccess", p => p.RequireClaim("scope", "writeAccess"));
+        });
 
             services.AddScoped<IPermissionStore<AppPermission>, PermissionStore<string, AppPermission
                 , IdentityContext, AppRole, AppUser, IdentityUserRole<string>, AppRolePermission, AppUserPermission>>();
             services.AddScoped<PermissionErrorDescriber>();
             services.AddScoped<PermissionManager<AppPermission>>();
-            services.AddScoped<IUserPermissonProvider, DirectUserPermissonProvider<AppPermission>>();
-            services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
             //call this in case you need aspnet-user-authtype/aspnet-user-identity
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IUserPermissonProvider, DirectUserPermissonProvider<AppPermission>>();
+            services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
+using Rwby.AspNetCore.Authorization;
+using Rwby.AspNetCore.Identity;
+using Rwby.Http;
 using Rwby.Users.Core;
 using Rwby.Users.Service;
 using Swashbuckle.AspNetCore.Swagger;
@@ -32,31 +35,7 @@ namespace Rwby.Users.Api
 
         public void Apply(Operation operation, OperationFilterContext context)
         {
-            //var controllerPolicies = context.ApiDescription.ControllerAttributes()
-            //    .OfType<AuthorizeAttribute>()
-            //    .Select(attr => attr.Policy);
-            //var actionPolicies = context.ApiDescription.ActionAttributes()
-            //    .OfType<AuthorizeAttribute>()
-            //    .Select(attr => attr.Policy);
-            //var policies = controllerPolicies.Union(actionPolicies).Distinct();
-            //var requiredClaimTypes = policies
-            //    .Select(x => this.authorizationOptions.Value.GetPolicy(x))
-            //    .SelectMany(x => x.Requirements)
-            //    .OfType<ClaimsAuthorizationRequirement>()
-            //    .Select(x => x.ClaimType);
 
-            //if (requiredClaimTypes.Any())
-            //{
-            //    operation.Responses.Add("401", new Response { Description = "Unauthorized" });
-            //    operation.Responses.Add("403", new Response { Description = "Forbidden" });
-
-            //    operation.Security = new List<IDictionary<string, IEnumerable<string>>>();
-            //    operation.Security.Add(
-            //        new Dictionary<string, IEnumerable<string>>
-            //        {
-            //        { "oauth2", requiredClaimTypes }
-            //        });
-            //}
         }
     }
 
@@ -133,6 +112,22 @@ namespace Rwby.Users.Api
             });
 
             ConfigureDbContext(services);
+
+            services.AddSingleton<IResilientHttpClientFactory, ResilientHttpClientFactory>();
+            services.AddSingleton<IHttpClient, ResilientHttpClient>(sp => sp.GetService<IResilientHttpClientFactory>().CreateResilientHttpClient());
+
+            //call this in case you need aspnet-user-authtype/aspnet-user-identity
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IUserPermissonProvider, RemoteUserPermissonProvider>(
+                (provider) =>
+                {
+                    return new RemoteUserPermissonProvider(new RemoteUserPermissonOptions() { ApiUrl = "http://localhost:40274/Permission/GetUserPermission" }
+                        , provider.GetService<IHttpContextAccessor>()
+                        , provider.GetService<IHttpClient>()
+                    );
+                });
+            services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
+
         }
 
 

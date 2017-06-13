@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Rwby.Http\Rwby.Http.csproj" />
     <ProjectReference Include="..\Rwby.Identity\Rwby.Identity.csproj" />
   </ItemGroup>
 

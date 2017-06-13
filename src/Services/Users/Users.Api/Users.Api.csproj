@@ -26,6 +26,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Infrastructure\Rwby.Http\Rwby.Http.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Rwby.Identity.Extention\Rwby.Identity.Extention.csproj" />
     <ProjectReference Include="..\Users.Core\Users.Core.csproj" />
     <ProjectReference Include="..\Users.Service\Users.Service.csproj" />
   </ItemGroup>

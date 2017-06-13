@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Rwby.AspNetCore.Mvc;
 using Rwby.Users.Core;
 using Rwby.Users.Service;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace Rwby.Users.Api
         /// get users
         /// </summary>
         /// <returns></returns>
+        [RequiresPermission("GetUsers")]
         [HttpGet]
         [Route("[action]")]
         public Task<IList<User>> GetUsers()

@@ -51,6 +51,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rwby.Identity", "src\Infras
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rwby.Identity.Extention", "src\Infrastructure\Rwby.Identity.Extention\Rwby.Identity.Extention.csproj", "{86013A0D-1668-4D7F-B2FD-C5B6F4EDBF60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rwby.Http", "src\Infrastructure\Rwby.Http\Rwby.Http.csproj", "{6DDCFAD6-28B0-4F3B-BCAD-0AA0EB4C4076}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,10 @@ Global
 		{86013A0D-1668-4D7F-B2FD-C5B6F4EDBF60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86013A0D-1668-4D7F-B2FD-C5B6F4EDBF60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86013A0D-1668-4D7F-B2FD-C5B6F4EDBF60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DDCFAD6-28B0-4F3B-BCAD-0AA0EB4C4076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DDCFAD6-28B0-4F3B-BCAD-0AA0EB4C4076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DDCFAD6-28B0-4F3B-BCAD-0AA0EB4C4076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DDCFAD6-28B0-4F3B-BCAD-0AA0EB4C4076}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -144,5 +150,6 @@ Global
 		{1D2A6A62-5C44-49F3-8464-0BB1EEC6B96C} = {EF457364-981A-4715-BEE7-1996AF8A7A58}
 		{1E5CD25D-1A83-4A66-AE79-509A1909E15A} = {FFD5003A-0FE6-4028-B73A-DE4C8D46171C}
 		{86013A0D-1668-4D7F-B2FD-C5B6F4EDBF60} = {FFD5003A-0FE6-4028-B73A-DE4C8D46171C}
+		{6DDCFAD6-28B0-4F3B-BCAD-0AA0EB4C4076} = {FFD5003A-0FE6-4028-B73A-DE4C8D46171C}
 	EndGlobalSection
 EndGlobal
