@@ -99,7 +99,8 @@ namespace Rwby.Identity
                 , IdentityContext, AppRole, AppUser, IdentityUserRole<string>, AppRolePermission, AppUserPermission>>();
             services.AddScoped<PermissionErrorDescriber>();
             services.AddScoped<PermissionManager<AppPermission>>();
-            services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler<AppPermission>>();
+            services.AddScoped<IUserPermissonProvider, DirectUserPermissonProvider<AppPermission>>();
+            services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
             //call this in case you need aspnet-user-authtype/aspnet-user-identity
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

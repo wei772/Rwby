@@ -21,25 +21,22 @@ namespace Identity.Api.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ActionName");
-
-                    b.Property<string>("AreaName");
-
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                        .IsConcurrencyToken().HasMaxLength(256);
 
-                    b.Property<string>("ControllerName");
-
-                    b.Property<string>("Description");
+                    b.Property<string>("Description").HasMaxLength(256);
 
                     b.Property<string>("Name")
                         .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName").HasMaxLength(256);
+
 
                     b.Property<long>("Origin");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name", "Origin")
+                    b.HasIndex("NormalizedName", "Origin")
                         .IsUnique()
                         .HasName("PermissionNameIndex");
 

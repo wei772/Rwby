@@ -15,12 +15,10 @@ namespace Identity.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    ActionName = table.Column<string>(nullable: true),
-                    AreaName = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
-                    ControllerName = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedName= table.Column<string>(maxLength: 256, nullable: true),
                     Origin = table.Column<long>(nullable: false)
                 },
                 constraints: table =>

@@ -11,7 +11,7 @@ namespace Rwby.AspNetCore.Identity
     {
         Task<TPermission> FindByIdAsync(string permissionId, CancellationToken cancellationToken);
 
-        Task<TPermission> FindByNameAsync(string name, long origin, CancellationToken cancellationToken);
+        Task<TPermission> FindByNameAsync(string normalizedName, long origin, CancellationToken cancellationToken);
 
         Task<IList<TPermission>> GetUserPermissionAsync(string userId, long origin, CancellationToken cancellationToken);
 

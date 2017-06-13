@@ -23,8 +23,8 @@ namespace Rwby.AspNetCore.Mvc
             private readonly IAuthorizationService _authService;
             private readonly PermissionAuthorizationRequirement _permissionRequirement;
 
-            public RequiresPermissionAttributeImpl(ILogger<RequiresPermissionAttribute> logger, 
-                                                   IAuthorizationService authService, 
+            public RequiresPermissionAttributeImpl(ILogger<RequiresPermissionAttribute> logger,
+                                                   IAuthorizationService authService,
                                                    PermissionAuthorizationRequirement permissionRequirement)
             {
                 _logger = logger;

@@ -22,22 +22,21 @@ namespace Rwby.AspNetCore.Authorization
         }
     }
 
-    public class PermissionAuthorizationHandler<TPermission> : AuthorizationHandler<PermissionAuthorizationRequirement>
-    where TPermission: IdentityPermission
+    public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionAuthorizationRequirement>
     {
         private readonly ILogger _logger;
-        private readonly PermissionManager<TPermission> _permissionManager;
+        private readonly IUserPermissonProvider _permissionProvider;
 
-        public PermissionAuthorizationHandler(ILogger<PermissionAuthorizationHandler<TPermission>> logger, PermissionManager<TPermission> permissionManager)
+        public PermissionAuthorizationHandler(ILogger<PermissionAuthorizationHandler> logger, IUserPermissonProvider permissionProvider)
         {
             _logger = logger;
-            _permissionManager = permissionManager;
+            _permissionProvider = permissionProvider;
         }
 
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissionAuthorizationRequirement requirement)
         {
             var userId = context.User.GetUserId();
-            var currentUserPermissions = (await _permissionManager.GetUserPermissionAsync(userId, 0)).Select(o => o.Name);
+            var currentUserPermissions = await _permissionProvider.GetUserPermissionAsync(userId, 0);
             var authorized = requirement.RequiredPermissions.Any(rp => currentUserPermissions.Contains(rp));
             if (authorized) context.Succeed(requirement);
         }
