@@ -166,7 +166,7 @@ namespace Rwby.Identity
                 ClientSecret = "secret",
 
                 ResponseType = "code id_token",
-                Scope = { "UserApi", "offline_access" },
+                Scope = { "UserApi"},
 
                 SaveTokens = true
             });
