@@ -13,6 +13,16 @@
     <RootNamespace>Identity.Api</RootNamespace>
     <AssemblyName>Identity.Api</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="nlog.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="nlog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="IdentityServer4.AspNetIdentity" Version="1.0.1" />
     <PackageReference Include="IdentityServer4.EntityFramework" Version="1.0.1" />

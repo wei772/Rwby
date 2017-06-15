@@ -116,14 +116,14 @@ namespace Rwby.Identity
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            // loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            // loggerFactory.AddDebug();
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
 
             //add NLog to ASP.NET Core
             loggerFactory.AddNLog();
-
             //add NLog.Web
             app.AddNLogWeb();
+
 
 
 
@@ -141,6 +141,26 @@ namespace Rwby.Identity
             app.UseCors("default");
 
             app.UseStaticFiles();
+
+
+            app.Use(async (ctx, next) =>
+            {
+
+                var content = "script-src  ajax.aspnetcdn.com  'self'  'unsafe-inline'; style-src ajax.aspnetcdn.com 'self';";
+                var CSP = "content-security-policy";
+                if (!ctx.Response.Headers.ContainsKey(CSP))
+                {
+                    ctx.Response.Headers.Add(CSP, content);
+                }
+
+                var XCSP = "X-Content-Security-Policy";
+                if (!ctx.Response.Headers.ContainsKey(XCSP))
+                {
+                    ctx.Response.Headers.Add(XCSP, content);
+                }
+
+                await next();
+            });
 
             app.UseIdentity();
 
@@ -166,10 +186,12 @@ namespace Rwby.Identity
                 ClientSecret = "secret",
 
                 ResponseType = "code id_token",
-                Scope = { "UserApi"},
+                Scope = { "UserApi" },
 
                 SaveTokens = true
             });
+
+
 
             app.UseMvcWithDefaultRoute();
 
