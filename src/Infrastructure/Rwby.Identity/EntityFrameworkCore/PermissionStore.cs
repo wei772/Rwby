@@ -80,6 +80,12 @@ namespace Rwby.AspNetCore.Identity
             return Permissions.FindAsync(new object[] { id }, cancellationToken);
         }
 
+        public Task<TPermission> FindByNameAsync(string normalizedName, long origin, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+
 
         public async Task<IList<TPermission>> GetUserPermissionAsync(string userId, long origin, CancellationToken cancellationToken)
         {
@@ -106,7 +112,7 @@ namespace Rwby.AspNetCore.Identity
 
 
             return userPermissions
-                .Union(userRolePermissions, new PermissonEqualityComparer<TPermission>())
+                .Union(userRolePermissions, new PermissonEqualityComparer<TPermission, TKey>())
                 .ToList();
 
         }
@@ -277,15 +283,8 @@ namespace Rwby.AspNetCore.Identity
             }
         }
 
-        public Task<TPermission> FindByNameAsync(string name, long origin, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<IList<TPermission>> GetUserPermissionAsync(string userId, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+
         #endregion
     }
 }

@@ -21,6 +21,7 @@ using Rwby.Identity.Services;
 using Microsoft.AspNetCore.Authorization;
 using Rwby.AspNetCore.Authorization;
 using Rwby.AspNetCore.Identity;
+using Rwby.Http;
 
 namespace Rwby.Identity
 {
@@ -40,16 +41,16 @@ namespace Rwby.Identity
 
         public IConfigurationRoot Configuration { get; }
 
-        private string GlobalConnection { get; set; }
+        private string IdentityConnection { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            GlobalConnection = Configuration.GetConnectionString("GlobalConnection");
+            IdentityConnection = Configuration.GetConnectionString("IdentityConnection");
 
             // Add framework services.
             services.AddDbContext<IdentityContext>(options =>
-                options.UseSqlServer(GlobalConnection));
+                options.UseSqlServer(IdentityConnection, b => b.MigrationsAssembly("Identity.Api")));
 
             services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<IdentityContext>()
@@ -88,37 +89,41 @@ namespace Rwby.Identity
                 .AddAspNetIdentity<AppUser>();
             ;
 
+
+
+
+
             // Configure named auth policies that map directly to OAuth2.0 scopes
             services.AddAuthorization(c =>
-            {
-                c.AddPolicy("readAccess", p => p.RequireClaim("scope", "readAccess"));
-                c.AddPolicy("writeAccess", p => p.RequireClaim("scope", "writeAccess"));
-            });
+        {
+            c.AddPolicy("readAccess", p => p.RequireClaim("scope", "readAccess"));
+            c.AddPolicy("writeAccess", p => p.RequireClaim("scope", "writeAccess"));
+        });
 
             services.AddScoped<IPermissionStore<AppPermission>, PermissionStore<string, AppPermission
                 , IdentityContext, AppRole, AppUser, IdentityUserRole<string>, AppRolePermission, AppUserPermission>>();
-
-
-            
             services.AddScoped<PermissionErrorDescriber>();
             services.AddScoped<PermissionManager<AppPermission>>();
-            services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler<AppPermission>>();
 
             //call this in case you need aspnet-user-authtype/aspnet-user-identity
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IUserPermissonProvider, DirectUserPermissonProvider<AppPermission>>();
+            services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            // loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            // loggerFactory.AddDebug();
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
 
             //add NLog to ASP.NET Core
             loggerFactory.AddNLog();
-
             //add NLog.Web
             app.AddNLogWeb();
+
 
 
 
@@ -136,6 +141,26 @@ namespace Rwby.Identity
             app.UseCors("default");
 
             app.UseStaticFiles();
+
+
+            app.Use(async (ctx, next) =>
+            {
+
+                var content = "script-src  ajax.aspnetcdn.com  'self'  'unsafe-inline'; style-src ajax.aspnetcdn.com 'self';";
+                var CSP = "content-security-policy";
+                if (!ctx.Response.Headers.ContainsKey(CSP))
+                {
+                    ctx.Response.Headers.Add(CSP, content);
+                }
+
+                var XCSP = "X-Content-Security-Policy";
+                if (!ctx.Response.Headers.ContainsKey(XCSP))
+                {
+                    ctx.Response.Headers.Add(XCSP, content);
+                }
+
+                await next();
+            });
 
             app.UseIdentity();
 
@@ -161,10 +186,12 @@ namespace Rwby.Identity
                 ClientSecret = "secret",
 
                 ResponseType = "code id_token",
-                Scope = { "UserApi", "offline_access" },
+                Scope = { "UserApi" },
 
                 SaveTokens = true
             });
+
+
 
             app.UseMvcWithDefaultRoute();
 

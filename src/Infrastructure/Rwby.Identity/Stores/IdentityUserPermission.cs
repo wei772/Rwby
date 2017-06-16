@@ -12,8 +12,7 @@ namespace Rwby.AspNetCore.Identity
 
     public class IdentityUserPermission<TKey> where TKey : IEquatable<TKey>
     {
-        public virtual int Id { get; set; }
-
+    
         public virtual TKey UserId { get; set; }
 
         public virtual TKey PermissionId { get; set; }

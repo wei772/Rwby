@@ -3,16 +3,19 @@ using System.Collections.Generic;
 
 namespace Rwby.AspNetCore.Identity
 {
-    internal class PermissonEqualityComparer<TPermission> : IEqualityComparer<TPermission>
+    internal class PermissonEqualityComparer<TPermission, TKey> : IEqualityComparer<TPermission>
+        where TKey : IEquatable<TKey>
+        where TPermission : IdentityPermission<TKey>
+
     {
         public bool Equals(TPermission x, TPermission y)
         {
-            throw new NotImplementedException();
+            return x.Name.Equals(y.Name);
         }
 
         public int GetHashCode(TPermission obj)
         {
-            throw new NotImplementedException();
+            return obj.Name.GetHashCode();
         }
     }
 }

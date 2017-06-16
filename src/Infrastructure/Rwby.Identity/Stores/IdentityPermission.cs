@@ -12,7 +12,11 @@ namespace Rwby.AspNetCore.Identity
     public class IdentityPermission<TKey> where TKey : IEquatable<TKey>
     {
         public virtual TKey Id { get; set; }
+
         public virtual string Name { get; set; }
+
+        public virtual string NormalizedName { get; set; }
+
         public virtual string Description { get; set; }
 
         public virtual string ConcurrencyStamp { get; set; }
@@ -21,9 +25,7 @@ namespace Rwby.AspNetCore.Identity
         /// while Origin=0 IsGlobal
         /// </summary>
         public virtual long Origin { get; set; }
-        public virtual string ControllerName { get; set; }
-        public virtual string ActionName { get; set; }
-        public virtual string AreaName { get; set; }
+
 
     }
 
