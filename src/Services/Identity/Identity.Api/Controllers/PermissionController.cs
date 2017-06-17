@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Rwby.Identity.Controllers
 
 {
-    [Authorize]
+    //[Authorize]
     [Route("[controller]")]
     public class PermissionController : Controller
     {
