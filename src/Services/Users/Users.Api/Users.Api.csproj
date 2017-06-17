@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="nlog.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="nlog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="wwwroot\swagger\custom.css" />
     <Content Include="wwwroot\swagger\index.html" />
   </ItemGroup>
@@ -32,5 +39,22 @@
     <ProjectReference Include="..\Users.Core\Users.Core.csproj" />
     <ProjectReference Include="..\Users.Service\Users.Service.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="nlog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
+
+<ItemGroup>
+
+<DocFile Include="bin\Debug\$(TargetFramework)\$(RuntimeIdentifier)\$(TargetName).xml" />
+
+</ItemGroup>
+
+<Copy SourceFiles="@(DocFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="false" />
+
+</Target> 
 
 </Project>
