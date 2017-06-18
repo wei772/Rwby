@@ -1,0 +1,46 @@
+{
+  "name": "bootstrap-ie8",
+  "authors": [
+    "steven wang <swxyzabc@gmail.com>"
+  ],
+  "description": "Make your application available in IE8",
+  "main": "README.md",
+  "moduleType": [],
+  "keywords": [
+    "ie8",
+    "bootstrap",
+    "jquery",
+    "respondjs",
+    "compatibility",
+    "es5shiv",
+    "html5shiv"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "src"
+  ],
+  "dependencies": {
+    "es5-shim": "~4.1.7",
+    "console-polyfill": "~0.2.1",
+    "html5shiv": "~3.7.2",
+    "Respond": "~1.4.2",
+    "bootstrap": "~3.3.5",
+    "jquery": "~1.11.3"
+  },
+  "homepage": "https://github.com/kalpaca/bootstrap-ie8",
+  "_release": "09f149e601",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "09f149e601318fbe6812f7fb8e1895f653ff02d2"
+  },
+  "_source": "https://github.com/kalpaca/bootstrap-ie8.git",
+  "_target": "*",
+  "_originalSource": "bootstrap-ie8",
+  "_direct": true
+}
