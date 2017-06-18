@@ -216,4 +216,4 @@ ModelManifest.xml
 
 # ASP.NET Core
 
-wwwroot/lib/     
+wwwroot/lib/*.*     
