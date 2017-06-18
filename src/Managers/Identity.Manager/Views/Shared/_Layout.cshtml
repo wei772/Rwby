@@ -11,6 +11,11 @@
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+
+        <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie_fix.css" />
+        <![endif]-->
+
     </environment>
     <environment names="Staging,Production">
         @*<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -23,23 +28,25 @@
     @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Identity.Manager</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
+    <nav>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container ">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Identity.Manager</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -52,21 +59,16 @@
     </div>
 
     <environment names="Development">
-        <script src="~/lib/jquery-1.11.1/dist/jquery.js"></script>
 
+        <script src="/js/jquery-1.12.2/dist/jquery.js"></script>
 
-
-        @*<script src="/lib/es5-shim/es5-shim.min.js"></script>
-            <script src="/lib/es5-shim/es5-sham.min.js"></script>*@
         <!--[if lte IE 9]>
-
         <script src="/lib/es5-shim/es5-shim.min.js"></script>
         <script src="/lib/es5-shim/es5-sham.min.js"></script>
         <script src="/lib/console-polyfill/index.js"></script>
         <script src="/lib/Respond/dest/respond.src.js"></script>
         <script src="/lib/html5shiv/dist/html5shiv.js"></script>
         <![endif]-->
-
 
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
