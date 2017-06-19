@@ -31,6 +31,7 @@ namespace Rwby.AspNetCore.Identity
 
         public async Task<IEnumerable<string>> GetUserPermissionAsync(string userId, long origin)
         {
+            //TODO : add internal authprize
             var userToken = await GetUserTokenAsync();
 
             var api = string.Format($"{_options.ApiUrl}?userId={userId}&origin={origin}");
