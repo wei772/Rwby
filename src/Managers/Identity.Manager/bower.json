@@ -7,7 +7,11 @@
     "jquery-validation": "1.14.0",
     "jquery-validation-unobtrusive": "3.2.6",
     "html5shiv": "3.7.3",
-    "bootstrap-ie8": "*"
+    "bootstrap-ie8": "*",
+    "datatables": "1.10.15",
+    "tendina": "~0.11.1",
+    "ueditor": "~1.4.3",
+    "jquery-mask-plugin": "jQuery-Mask-Plugin#~1.14.11"
   },
   "resolutions": {
     "jquery": "1.9.1 - 3"
