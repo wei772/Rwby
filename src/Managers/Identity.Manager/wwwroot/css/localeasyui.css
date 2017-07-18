@@ -1,0 +1,20 @@
+.panel-header,
+.panel-body {
+    border-width: 0px;
+}
+
+.easyuiCon {
+    border: solid 1px #D4D4D4 !important;
+}
+
+
+
+.easyui-tabs,
+.easyuiCon,
+.easyuiCon *,
+.easyuiCon *:before,
+.easyuiCon *:after {
+    -webkit-box-sizing: content-box !important;
+    -moz-box-sizing: content-box !important;
+    box-sizing: content-box !important;
+}
