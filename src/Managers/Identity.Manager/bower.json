@@ -11,7 +11,8 @@
     "datatables": "1.10.15",
     "tendina": "~0.11.1",
     "ueditor": "~1.4.3",
-    "jquery-mask-plugin": "jQuery-Mask-Plugin#~1.14.11"
+    "jquery-mask-plugin": "jQuery-Mask-Plugin#~1.14.11",
+    "easytabs": "~3.2.0"
   },
   "resolutions": {
     "jquery": "1.9.1 - 3"
